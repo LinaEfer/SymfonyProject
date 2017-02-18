@@ -1,0 +1,24 @@
+{{ form_start(form) }}
+{{ form_widget(form) }}
+<a href="/episodes/about">About</a>
+{{ form_end(form) }}
+
+{#
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Episode Manager</h1>
+
+    {% for e in episodes %}
+        <div id="e{{ e.id }}">
+            <h2>{{ e.name }}</h2>
+            Series : {{ e.tvSeries }}
+            Episode number : {{ e.episodeNumber }}
+            <p>{{ e.description }}</p>
+        </div>
+    {% endfor %}
+
+    {% for t in tv %}
+          {{ t.name }}
+    {% endfor %}
+{% endblock%}#}
