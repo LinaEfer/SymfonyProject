@@ -3,83 +3,56 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraint as Assert;
 
-    class User
+    /**
+    * @ORM\Entity
+    * @ORM\Table(name="user")
+    */
+    class User implements UserInterface
     {
         /**
-         * @var
-         *
-         * @ORM\Id()
-         * @ORM\GeneratedValue(strategy="UUID")
-         * @ORM\Column(type="guid")
+         * @ORM\Id
+         * @ORM\GeneratedValue(strategy="AUTO")
+         * @ORM\Column(type="integer")
          */
         private $id;
 
         /**
-         * @var string;
-         *
-         * @ORM\Column(type="string"; nullable=false)
-         * Assert\NotBlank()
-         *
+         * @ORM\Column(type="string", unique=true)
          */
-        private $name;
+        private $email;
 
-        /**
-         * @var string;
-         * 
-         * @ORM\Column(type="string"; nullable=false)
-         * Assert\NotBlank()
-         *
-         */
-        private $password;
+        public function getUsername()
+        {
+            return $this->email;
+        }
 
-        /**
-         * @return string
-         */
+        public function getRoles()
+        {
+            return [ROLE_USER];
+        }
+
         public function getPassword()
         {
-            return $this->password;
+        }
+
+        public function getSalt()
+        {
+        }
+
+        public function eraseCredentials()
+        {
         }
 
         /**
-         * @param string $password
+         * @param mixed $email
          */
-        public function setPassword($password)
+        public function setEmail($email)
         {
-            $this->password = $password;
+            $this->email = $email;
         }
 
-        /**
-         * @return mixed
-         */
-        public function getId()
-        {
-            return $this->id;
-        }
 
-        /**
-         * @param mixed $id
-         */
-        public function setId($id)
-        {
-            $this->id = $id;
-        }
-
-        /**
-         * @return string
-         */
-        public function getName()
-        {
-            return $this->name;
-        }
-
-        /**
-         * @param string $name
-         */
-        public function setName($name)
-        {
-            $this->name = $name;
-        }
-        
     }
