@@ -36,6 +36,11 @@ use Symfony\Component\Validator\Constraint as Assert;
          */
         private $plainPassword;
 
+        /**
+         * @ORM\Column(type="json_array")
+         */
+        private $roles = [];
+
         public function getUsername()
         {
             return $this->email;
@@ -43,7 +48,17 @@ use Symfony\Component\Validator\Constraint as Assert;
 
         public function getRoles()
         {
-            return ['ROLE_USER'];
+            $roles = $this->roles;
+
+            if (!in_array('ROLE_USER', $roles)) {
+                $roles[] = 'ROLE_USER';
+            }
+            return $roles;
+        }
+
+        public function setRoles(array $roles)
+        {
+            $this->roles = $roles;
         }
 
         public function getPassword()
@@ -75,7 +90,6 @@ use Symfony\Component\Validator\Constraint as Assert;
         {
             return $this->email;
         }
-        
 
         /**
          * @param mixed $password

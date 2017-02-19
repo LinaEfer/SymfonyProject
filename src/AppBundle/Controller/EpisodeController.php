@@ -21,6 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class EpisodeController extends Controller
 {
@@ -68,6 +69,7 @@ class EpisodeController extends Controller
     }
         /**
          * @Route("/episodes/about")
+         * @Security("is_granted('ROLE_USER')")
          */
         public function listAction()
         {
