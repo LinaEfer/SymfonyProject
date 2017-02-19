@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Role;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraint as Assert;
 
@@ -24,6 +25,17 @@ use Symfony\Component\Validator\Constraint as Assert;
          */
         private $email;
 
+        /**
+         * The encoded password
+         * @ORM\Column(type="string")
+         */
+        private $password;
+
+        /**
+         * @var string
+         */
+        private $plainPassword;
+
         public function getUsername()
         {
             return $this->email;
@@ -36,6 +48,7 @@ use Symfony\Component\Validator\Constraint as Assert;
 
         public function getPassword()
         {
+            return $this->password;
         }
 
         public function getSalt()
@@ -44,6 +57,7 @@ use Symfony\Component\Validator\Constraint as Assert;
 
         public function eraseCredentials()
         {
+            $this->plainPassword = null;
         }
 
         /**
@@ -52,6 +66,40 @@ use Symfony\Component\Validator\Constraint as Assert;
         public function setEmail($email)
         {
             $this->email = $email;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getEmail()
+        {
+            return $this->email;
+        }
+        
+
+        /**
+         * @param mixed $password
+         */
+        public function setPassword($password)
+        {
+            $this->password = $password;
+        }
+
+        /**
+         * @return string
+         */
+        public function getPlainPassword()
+        {
+            return $this->plainPassword;
+        }
+
+        /**
+         * @param string $plainPassword
+         */
+        public function setPlainPassword($plainPassword)
+        {
+            $this->plainPassword = $plainPassword;
+            $this->password = null;
         }
 
 
