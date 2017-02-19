@@ -173,5 +173,14 @@ class Episode
     {
         $this->image = $image;
     }
+
+    /**
+     * toString
+     * @return string
+     */
+    public function __toString() 
+    {
+        return $this->getId();
+    }
     
 }

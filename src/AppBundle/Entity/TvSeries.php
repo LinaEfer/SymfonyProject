@@ -196,4 +196,13 @@ class TvSeries
     {
         $this->episode->removeElement($episode);
     }
+
+    /**
+     * toString
+     * @return string
+     */
+    public function __toString() 
+    {
+        return $this->getId();
+    }
 }
