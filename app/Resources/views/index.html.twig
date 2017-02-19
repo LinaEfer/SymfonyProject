@@ -1,19 +1,38 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{% for s in series %}
-    <ul id="{{ s.id }}"> <br />
-        Serial : {{ s.name }} <br />
-        Author : {{ s.author }} <br />
-        <p>{{ s.description }}</p>
-
-        {% for e in episodes %}
-            {% if e.tvSeries == s.id %}
-                testjf : {{e.tvSeries}} ; {{s.id}}<br />
-                Episode name : {{ e.name }}<br />
-                Episode number : {{ e.episodeNumber }}<br />
-            {% endif %}
+    <h1>Liste des séries</h1>
+    <div class="container">
+        <div class="col-md-3 col-sm-12">
+        {% for s in series %}
+            <div class="panel panel-default">
+                <div class="panel-heading" id="{{ s.id }}">
+                    {{ s.name }} 
+                </div>
+                <div class="panel-body">
+                    <h4>Détail :</h4>
+                    Auteur : {{ s.author }} <br />
+                    {% if s.description != null %}
+                        Description : {{ s.description }} <br />
+                    {% endif %}
+                    <br />
+                    <!--div class="text-center">
+                        <button id="{{s.id}}/1" type="button" class="btn btn-primary">Épisodes</button>
+                    </div>-->
+                    <br />
+                    <div id="{{s.id}}/2">
+                        <p><b>Episodes :</b></p>
+                        {% for e in episodes %}
+                            {% if e.tvSeries == s.id %}
+                                <p class="center">{{ e.episodeNumber }} - {{ e.name }}<p/>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
-{% endfor %}
+        </div>
+    </div>
 {% endblock %}
+
+    
