@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 use AppBundle\AppBundle;
 use AppBundle\Entity\Episode;
 use AppBundle\Entity\TvSeries;
+use AppBundle\Form\EpisodeForm;
 use Doctrine\ORM\EntityRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -35,21 +36,7 @@ class EpisodeController extends Controller
         //Create new episode
         $e = new Episode();
 
-        $formEpisode = $this->createFormBuilder($e)
-            ->add('tvSeries', EntityType::class, array(
-                'class' => 'AppBundle\Entity\TvSeries',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u')
-                        ->orderBy('u.name', 'ASC');
-                },
-                'choice_label' => 'name',
-            ))
-            ->add('name', TextType::class)
-            ->add('episodeNumber', TextType::class)
-            ->add('datePublished', DateType::class)
-            ->add('description', TextType::class)
-            ->add('save', SubmitType::class, array('label' => 'Create Episode'))
-            ->getForm();
+        $formEpisode = $this->createForm(EpisodeForm::class, $e);
 
         $formEpisode->handleRequest($request);
 

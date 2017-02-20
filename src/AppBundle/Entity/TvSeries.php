@@ -7,10 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * TV Series.
- *
- * @author JF <jfdurk@gmx.fr>
- *
  * @ORM\Entity
  */
 class TvSeries

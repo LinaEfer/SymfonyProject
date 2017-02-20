@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Episode;
 use AppBundle\Entity\TvSeries;
+use AppBundle\Form\TvSeriesForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,16 +21,8 @@ class TvSeriesController extends Controller
      */
     public function createSeriesAction(Request $request) {
         $s = new TvSeries();
-       // $s->setAuthor($request->get('author'));
-       // $s->setName($request->get('name'));
-       // $s->setDescription($request->get('description'));
 
-        $formSeries = $this->createFormBuilder($s)
-            ->add('name', TextType::class)
-            ->add('author', TextType::class)
-            ->add('description', TextType::class)
-            ->add('save', SubmitType::class, array('label' => 'Create Series'))
-            ->getForm();
+        $formSeries = $this->createForm(TvSeriesForm::class, $s);
 
         $formSeries->handleRequest($request);
         
