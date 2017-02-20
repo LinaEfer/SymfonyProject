@@ -2,14 +2,16 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\Role;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraint as Assert;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
     /**
     * @ORM\Entity
     * @ORM\Table(name="user")
+     * @UniqueEntity(fields={"email"}, message="It looks like your already have an account!")
     */
     class User implements UserInterface
     {
@@ -21,6 +23,8 @@ use Symfony\Component\Validator\Constraint as Assert;
         private $id;
 
         /**
+         * @Assert\NotBlank()
+         * @Assert\Email()
          * @ORM\Column(type="string", unique=true)
          */
         private $email;
@@ -32,14 +36,10 @@ use Symfony\Component\Validator\Constraint as Assert;
         private $password;
 
         /**
+         * @Assert\NotBlank(groups={"Registration"})
          * @var string
          */
         private $plainPassword;
-
-        /**
-         * @ORM\Column(type="json_array")
-         */
-        private $roles = [];
 
         public function getUsername()
         {
@@ -48,17 +48,7 @@ use Symfony\Component\Validator\Constraint as Assert;
 
         public function getRoles()
         {
-            $roles = $this->roles;
-
-            if (!in_array('ROLE_USER', $roles)) {
-                $roles[] = 'ROLE_USER';
-            }
-            return $roles;
-        }
-
-        public function setRoles(array $roles)
-        {
-            $this->roles = $roles;
+            return ['ROLE_USER'];
         }
 
         public function getPassword()
@@ -90,6 +80,7 @@ use Symfony\Component\Validator\Constraint as Assert;
         {
             return $this->email;
         }
+
 
         /**
          * @param mixed $password
