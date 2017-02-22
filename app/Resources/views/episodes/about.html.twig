@@ -3,18 +3,23 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-    <div class="sea-creature-container">
+    <div class="genus-details">
         <div class="genus-photo"></div>
-        <div class="genus-details">
+        <div class="genus-name">
             <dl class="genus-details-list">
-                <dt>Series:</dt>
-                <dd>Octopodinae</dd>
-                <dt>Episode:</dt>
-                <dd>28</dd>
-                <dt>Description:</dt>
-                <dd>Octopuses can change the color of their body in just three-tenths of a second!</dd>
-                <dt>Date published:</dt>
-                <dd>01.01.2015</dd>
+                {% for s in series %}
+                    <dt>Series: </dt>
+                    <dd>{{ s.name }}</dd>
+                    <div id="{{s.id}}/2">
+                        <dt>Episodes :</dt>
+                        {% for e in episodes %}
+                            {% if e.tvSeries == s.id %}
+                                <dd class="center">{{ e.episodeNumber }} - {{ e.name }}</dd>
+                                <button class="btn btn-primary" type="submit"><a href="{{ path ('add_episode', {'episode_name': e.name }) }}">I want watch it!</a></button>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
             </dl>
         </div>
     </div>

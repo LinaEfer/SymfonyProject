@@ -19,8 +19,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Episode
 {
     /**
-     * @var
-     *
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\Column(type="guid")

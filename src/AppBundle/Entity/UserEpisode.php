@@ -20,7 +20,6 @@ class UserEpisode
      */
     private $id;
     /**
-     * @var string;
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
@@ -108,6 +107,10 @@ class UserEpisode
         $this->current = $current;
     }
 
+    public function __construct()
+    {
+        $this->watchedAt = new \DateTime();
+    }
     /**
      * @return \DateTimeInterface
      */

@@ -7,7 +7,10 @@
         {% for s in series %}
             <div class="panel panel-default">
                 <div class="panel-heading" id="{{ s.id }}">
-                    {{ s.name }} 
+                    {{ s.name }}
+                    {% if is_granted('ROLE_USER') %}
+                        <button type="submit" class="btn btn-info"><a href="{{ path('episode_info') }}">Info </a><span class="fa fa-arrow-circle-o-right"></span></button>
+                    {% endif %}
                 </div>
                 <div class="panel-body">
                     <h4>Detail :</h4>

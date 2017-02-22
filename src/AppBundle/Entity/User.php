@@ -17,8 +17,8 @@ use Symfony\Component\Validator\Constraints as Assert;
     {
         /**
          * @ORM\Id
-         * @ORM\GeneratedValue(strategy="AUTO")
-         * @ORM\Column(type="integer")
+         * @ORM\GeneratedValue(strategy="UUID")
+         * @ORM\Column(type="guid")
          */
         private $id;
 
@@ -107,5 +107,20 @@ use Symfony\Component\Validator\Constraints as Assert;
             $this->password = null;
         }
 
+        /**
+         * @return mixed
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
 
+        /**
+         * @param mixed $id
+         */
+        public function setId($id)
+        {
+            $this->id = $id;
+        }
+        
     }

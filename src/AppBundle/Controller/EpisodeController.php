@@ -54,15 +54,4 @@ class EpisodeController extends Controller
             'form' => $formEpisode->createView(),
         ));
     }
-        /**
-         * @Route("/episodes/about")
-         * @Security("is_granted('ROLE_USER')")
-         */
-        public function listAction()
-        {
-            $manager = $this->getDoctrine()->getManager();
-            $episodes = $manager->getRepository(Episode::class)->findAll();
-
-            return $this->render('episodes/about.html.twig', ['episodes' => $episodes]);
-        }
-    }
+}

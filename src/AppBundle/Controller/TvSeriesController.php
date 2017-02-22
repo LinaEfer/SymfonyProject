@@ -47,7 +47,7 @@ class TvSeriesController extends Controller
      */
     public function removeSeriesAction(Request $request)
     {
-        //series/remove/series_name=...
+        //series/remove?series_name=...
         $manager = $this->getDoctrine()->getManager();
         $seriesName = $request->get('series_name');
         $name = $manager->getRepository(TvSeries::class)->findOneBy(['name' => $seriesName]);
