@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Episode
 {
     /**
+     * @var string
+     * 
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\Column(type="guid")
@@ -26,7 +28,7 @@ class Episode
     private $id;
 
     /**
-     * @var
+     * @var string
      * @ORM\Column(nullable=true)
      */
     private $name;
@@ -59,6 +61,32 @@ class Episode
      * @var string
      */
     private $image;
+
+    /**
+     * @ORM\OneToMany(targetEntity="UserEpisode", mappedBy="episode_id")
+     */
+    private $episodeUser;
+
+    public function __construct()
+    {
+        $this->episodeUser = new ArrayCollection();
+    }
+
+    /**
+     * @return UserEpisode
+     */
+    public function getEpisodeUser()
+    {
+        return $this->episodeUser;
+    }
+
+    /**
+     * @param UserEpisode $episodeUser
+     */
+    public function setEpisodeUser($episodeUser)
+    {
+        $this->episodeUser = $episodeUser;
+    }
 
     /**
      * @return mixed
@@ -170,15 +198,6 @@ class Episode
     public function setImage($image)
     {
         $this->image = $image;
-    }
-
-    /**
-     * toString
-     * @return string
-     */
-    public function __toString() 
-    {
-        return $this->getId();
     }
     
 }

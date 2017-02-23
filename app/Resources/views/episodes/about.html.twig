@@ -7,19 +7,15 @@
         <div class="genus-photo"></div>
         <div class="genus-name">
             <dl class="genus-details-list">
-                {% for s in series %}
-                    <dt>Series: </dt>
-                    <dd>{{ s.name }}</dd>
-                    <div id="{{s.id}}/2">
+                  <dt>Series: </dt>
+                    <dd>{{ series.name }}</dd>
+                     <div>
                         <dt>Episodes :</dt>
-                        {% for e in episodes %}
-                            {% if e.tvSeries == s.id %}
-                                <dd class="center">{{ e.episodeNumber }} - {{ e.name }}</dd>
+                            {% for e in episodes %}
+                                <dd class="center">{{ e.episodeNumber}} - {{ e.name }}</dd>
                                 <button class="btn btn-primary" type="submit"><a href="{{ path ('add_episode', {'episode_name': e.name }) }}">I want watch it!</a></button>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                {% endfor %}
+                            {% endfor %}
+                     </div>
             </dl>
         </div>
     </div>

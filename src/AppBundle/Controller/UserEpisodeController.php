@@ -28,21 +28,21 @@ class UserEpisodeController extends Controller
             throw $this->createAccessDeniedException();
         }
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        $userId = $user->getId();
+        $user_id = $user->getId();
 
         $manager = $this->getDoctrine()->getManager();
         
         $episodeName = $request->get('episode_name');
         $eName = $manager->getRepository(Episode::class)->findOneBy(array('name' => $episodeName));
-        $episodeId = $eName->getId();
+        $episode_id = $eName->getId();
 
         $ue = new UserEpisode();
-        $ue->setUserId($userId);
-        $ue->setEpisodeId($episodeId);
+        $ue->setUserId($user_id);
+        $ue->setEpisodeId($episode_id);
 
-        dump($userId, $eName, $ue);
+        dump($user_id, $eName, $ue);
 
-/*        $em = $this->getDoctrine()->getManager();
+       /* $em = $this->getDoctrine()->getManager();
         $em->persist($ue);
         $em->flush();*/
 
@@ -54,20 +54,15 @@ class UserEpisodeController extends Controller
      * @Route("/episodes/about", name="episode_info")
      * @Security("is_granted('ROLE_USER')")
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException();
-        }
-
-        $user = $this->get('security.token_storage')->getToken()->getUser();
-
         $manager = $this->getDoctrine()->getManager();
-        $series = $manager->getRepository(TvSeries::class)->findAll();
-        $episodes = $manager->getRepository(Episode::class)->findAll();
-        $currentUser = $manager->getRepository(User::class)->find($user);
+        $seriesName = $request->get('series_name');
+        $series = $manager->getRepository(TvSeries::class)->findOneBy(array('name' => $seriesName));
+        $seriesId = $series->getId();
+        $episodes = $manager->getRepository(Episode::class)->findBy(array('tvSeries'=> $seriesId));
 
-        return $this->render('episodes/about.html.twig',['series' => $series,'episodes' => $episodes, 'user' => $currentUser]);
+        return $this->render('episodes/about.html.twig',['series' => $series,'episodes' => $episodes]);
     }
 
 }

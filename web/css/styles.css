@@ -36,7 +36,17 @@ Flexbox Layout
 .footer {
     justify-content: center;
 }
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
 
+a:hover
+{
+    color:#ffffff;
+    text-decoration:none;
+    cursor:pointer;
+}
 @media all and (min-width: 700px) {
     .sea-creature-container {
         flex-direction: row;

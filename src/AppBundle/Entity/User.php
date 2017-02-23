@@ -16,6 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
     class User implements UserInterface
     {
         /**
+         * @var string
+         * 
          * @ORM\Id
          * @ORM\GeneratedValue(strategy="UUID")
          * @ORM\Column(type="guid")
@@ -41,6 +43,32 @@ use Symfony\Component\Validator\Constraints as Assert;
          */
         private $plainPassword;
 
+        /**
+         * @ORM\OneToMany(targetEntity="UserEpisode", mappedBy="user_id")
+         */
+        private $userEpisode;
+
+        public function __construct()
+        {
+            $this->userEpisode = new ArrayCollection();
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getUserEpisode()
+        {
+            return $this->userEpisode;
+        }
+
+        /**
+         * @param mixed $userEpisode
+         */
+        public function setUserEpisode($userEpisode)
+        {
+            $this->userEpisode = $userEpisode;
+        }
+        
         public function getUsername()
         {
             return $this->email;

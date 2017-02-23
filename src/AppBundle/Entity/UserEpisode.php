@@ -19,15 +19,17 @@ class UserEpisode
      * @ORM\Column(type="guid")
      */
     private $id;
+    
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="userEpisode", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user_id;
 
     /**
-     * @var string
-     * @ORM\ManyToOne(targetEntity="Episode")
+     * @var Episode
+     * @ORM\ManyToOne(targetEntity="Episode", inversedBy="episodeUser", cascade={"persist"})
      * @ORM\JoinColumn(name="episode_id", referencedColumnName="id")
      */
     private $episode_id;
@@ -60,7 +62,7 @@ class UserEpisode
     }
 
     /**
-     * @return string
+     * @return User
      */
     public function getUserId()
     {
@@ -68,7 +70,7 @@ class UserEpisode
     }
 
     /**
-     * @param string $user_id
+     * @param User $user_id
      */
     public function setUserId($user_id)
     {
@@ -76,7 +78,7 @@ class UserEpisode
     }
 
     /**
-     * @return string
+     * @return Episode
      */
     public function getEpisodeId()
     {
@@ -84,7 +86,7 @@ class UserEpisode
     }
 
     /**
-     * @param string $episode_id
+     * @param Episode $episode_id
      */
     public function setEpisodeId($episode_id)
     {
