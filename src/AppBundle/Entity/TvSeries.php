@@ -40,6 +40,7 @@ class TvSeries
 	 * @var string
 	 */
 	private $description;
+    
     /**
      * @ORM\OneToMany(targetEntity="Episode", mappedBy="tvSeries")
      */
@@ -166,8 +167,6 @@ class TvSeries
 	 */
 	private $image;
 
-
-	
 
     /**
      * Add episode

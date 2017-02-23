@@ -1,28 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-{{ form_start(form) }}
-{{ form_widget(form) }}
-<a href="/episodes/about">About</a>
-{{ form_end(form) }}
-
+    {% block body %}
+    <div class="container">
+        <h1 class="center">Create a new episode</h1>
+        {{ form_start(form) }}
+             <div class="panel">
+                 {{ form_widget(form) }}
+                 <button type="submit" class="btn btn-primary"><a href="{{ path('homepage') }}">Back </a></button>
+             </div>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
-{#
-{% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Episode Manager</h1>
-
-    {% for e in episodes %}
-        <div id="e{{ e.id }}">
-            <h2>{{ e.name }}</h2>
-            Series : {{ e.tvSeries }}
-            Episode number : {{ e.episodeNumber }}
-            <p>{{ e.description }}</p>
-        </div>
-    {% endfor %}
-
-    {% for t in tv %}
-          {{ t.name }}
-    {% endfor %}
-{% endblock%}#}

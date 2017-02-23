@@ -8,9 +8,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading" id="{{ s.id }}">
                     {{ s.name }}
-                    {% if is_granted('ROLE_USER') %}
-                        <button type="submit" class="btn btn-info"><a href="{{ path('episode_info', {'series_name': s.name }) }}">Info </a></button>
-                    {% endif %}
+                       {% if is_granted('ROLE_USER') %}
+                           <button type="submit" class="btn pull-right plus-btn btn-info"><a href="{{ path('episode_info', {'series_name': s.name }) }}">Info </a></button>
+                       {% endif %}
                 </div>
                 <div class="panel-body">
                     <h4>Detail :</h4>
@@ -34,6 +34,10 @@
                 </div>
             </div>
         {% endfor %}
+        </div>
+        <div class="col-lg-4">
+            <button type="submit" class="btn pull-right btn-block btn-primary"><a href="{{ path('create_serie') }}">Create new TvSerie </a></button>
+            <button type="submit" class="btn pull-right btn-block btn-primary"><a href="{{ path('create_episode') }}">Create new Episode </a></button>
         </div>
     </div>
 {% endblock %}

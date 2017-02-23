@@ -3,8 +3,8 @@
 namespace AppBundle\Entity;
 
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -44,7 +44,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         private $plainPassword;
 
         /**
-         * @ORM\OneToMany(targetEntity="UserEpisode", mappedBy="user_id")
+         * @ORM\OneToMany(targetEntity="UserEpisode", mappedBy="user")
          */
         private $userEpisode;
 
@@ -54,7 +54,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         }
 
         /**
-         * @return mixed
+         * @return UserEpisode
          */
         public function getUserEpisode()
         {
@@ -62,7 +62,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         }
 
         /**
-         * @param mixed $userEpisode
+         * @param UserEpisode $userEpisode
          */
         public function setUserEpisode($userEpisode)
         {
@@ -136,7 +136,8 @@ use Symfony\Component\Validator\Constraints as Assert;
         }
 
         /**
-         * @return mixed
+         * @return string
+         * 
          */
         public function getId()
         {
@@ -144,7 +145,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         }
 
         /**
-         * @param mixed $id
+         * @param string $id
          */
         public function setId($id)
         {

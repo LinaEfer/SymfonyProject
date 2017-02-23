@@ -3,22 +3,25 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-    <div class="genus-details">
+    <div class="sea-creature-container">
         <div class="genus-photo"></div>
         <div class="genus-name">
             <dl class="genus-details-list">
-                  <dt>Series: </dt>
+                  <dt>Tv Series : </dt>
                     <dd>{{ series.name }}</dd>
                      <div>
-                        <dt>Episodes :</dt>
+                        <dt>Episodes : </dt>
                             {% for e in episodes %}
-                                <dd class="center">{{ e.episodeNumber}} - {{ e.name }}</dd>
-                                <button class="btn btn-primary" type="submit"><a href="{{ path ('add_episode', {'episode_name': e.name }) }}">I want watch it!</a></button>
+                                <div class="col-md-12">
+                                    {{ e.episodeNumber}} - {{ e.name }}
+                                        <button class="btn pull-right btn-primary btn-sm" type="submit"><a href="{{ path ('add_episode', {'episode_name': e.name }) }}">I want watch it!</a></button>
+                                </div>
                             {% endfor %}
                      </div>
             </dl>
         </div>
     </div>
     <div class="notes-container">
+        <button type="submit" class="btn btn-primary"><a href="{{ path('homepage') }}">Back to Homepage</a></button>
     </div>
 {% endblock %}

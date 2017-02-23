@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -22,17 +21,19 @@ class UserEpisode
     
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="userEpisode", cascade={"persist"})
+     * 
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="userEpisode")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $user_id;
+    private $user;
 
     /**
      * @var Episode
-     * @ORM\ManyToOne(targetEntity="Episode", inversedBy="episodeUser", cascade={"persist"})
+     * 
+     * @ORM\ManyToOne(targetEntity="Episode", inversedBy="userEpisode")
      * @ORM\JoinColumn(name="episode_id", referencedColumnName="id")
      */
-    private $episode_id;
+    private $episode;
 
     /**
      * @ORM\Column(type="boolean")
@@ -64,33 +65,33 @@ class UserEpisode
     /**
      * @return User
      */
-    public function getUserId()
+    public function getUser()
     {
-        return $this->user_id;
+        return $this->user;
     }
 
     /**
-     * @param User $user_id
+     * @param User $user
      */
-    public function setUserId($user_id)
+    public function setUser(User $user)
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
     }
 
     /**
      * @return Episode
      */
-    public function getEpisodeId()
+    public function getEpisode()
     {
-        return $this->episode_id;
+        return $this->episode;
     }
 
     /**
-     * @param Episode $episode_id
+     * @param Episode $episode
      */
-    public function setEpisodeId($episode_id)
+    public function setEpisode(Episode $episode)
     {
-        $this->episode_id = $episode_id;
+        $this->episode = $episode;
     }
 
     /**

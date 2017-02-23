@@ -8,26 +8,18 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\AppBundle;
 use AppBundle\Entity\Episode;
-use AppBundle\Entity\TvSeries;
 use AppBundle\Form\EpisodeForm;
-use Doctrine\ORM\EntityRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class EpisodeController extends Controller
 {
     /**
-     * @Route("/episodes/create")
+     * @Route("/episodes/create", name="create_episode")
      * @param Request $request
      * @return Response
      */
@@ -50,8 +42,26 @@ class EpisodeController extends Controller
 
             return new Response('New episode was added');
         }
+
         return $this->render('episodes/index.html.twig', array(
             'form' => $formEpisode->createView(),
         ));
+    }
+
+    /**
+     * @Route("/episode/remove")
+     * @param Request $request
+     * @return Response
+     */
+    public function removeEpisodeAction(Request $request)
+    {
+        //series/remove?series_name=...
+        $manager = $this->getDoctrine()->getManager();
+        $episodeName = $request->get('episode_name');
+        $name = $manager->getRepository(Episode::class)->findOneBy(['name' => $episodeName]);
+
+        $manager->remove($name);
+        $manager->flush();
+        return new Response('ok');
     }
 }

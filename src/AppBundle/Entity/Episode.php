@@ -8,6 +8,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -20,7 +21,6 @@ class Episode
 {
     /**
      * @var string
-     * 
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\Column(type="guid")
@@ -65,29 +65,29 @@ class Episode
     /**
      * @ORM\OneToMany(targetEntity="UserEpisode", mappedBy="episode_id")
      */
-    private $episodeUser;
+    private $userEpisode;
 
     public function __construct()
     {
-        $this->episodeUser = new ArrayCollection();
+        $this->userEpisode = new ArrayCollection();
     }
 
     /**
-     * @return UserEpisode
+     * @return mixed
      */
-    public function getEpisodeUser()
+    public function getUserEpisode()
     {
-        return $this->episodeUser;
+        return $this->userEpisode;
     }
 
     /**
-     * @param UserEpisode $episodeUser
+     * @param mixed $userEpisode
      */
-    public function setEpisodeUser($episodeUser)
+    public function setUserEpisode($userEpisode)
     {
-        $this->episodeUser = $episodeUser;
+        $this->userEpisode = $userEpisode;
     }
-
+    
     /**
      * @return mixed
      */
