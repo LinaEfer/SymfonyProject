@@ -12,6 +12,9 @@
         <br />
         <div class="row">
             {% for s in series %}
+            {% if loop.index is divisible by(3) %}
+            <div class="row">
+            {% endif %}
             <div class="col-xs-12 col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading" id="{{ s.id }}">
@@ -42,6 +45,9 @@
                     </div>
                 </div>
             </div>
+            {% if loop.index is divisible by(3) %}
+            </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>
