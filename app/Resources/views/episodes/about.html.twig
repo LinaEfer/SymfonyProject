@@ -11,12 +11,18 @@
                     <dd>{{ series.name }}</dd>
                      <div>
                         <dt>Episodes : </dt>
-                        {% for e in episodes %}
-                            <div class="col-md-12">
-                                {{ e.episodeNumber}} - {{ e.name }}
-                                <a class="btn pull-right btn-primary btn-sm" href="{{ path ('add_episode', {'episode_name': e.name }) }}">I want to watch it!</a>
-                            </div>
-                        {% endfor %}
+                            <table class="table">
+                                <tbody>    
+                                {% for e in episodes %}
+                                    <tr>
+                                        <td>{{ e.episodeNumber}} - {{ e.name }}</td>
+
+                                        <td><a class="btn pull-right btn-primary btn-sm" href="{{ path ('add_episode', {'episode_name': e.name }) }}">I want to watch it!</a></td>
+                                    </tr>
+                                {% endfor %} 
+                                </tbody>  
+                            </table>
+
                      </div>
             </dl>
         </div>

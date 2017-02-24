@@ -130,5 +130,4 @@ class UserEpisode
         $this->watchedAt = $watchedAt;
     }
 
-    
 }
