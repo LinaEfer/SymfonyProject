@@ -26,6 +26,8 @@
             <ul class="navi">
                 <li class="search"><a href="#" class="js-header-search-toggle"><i class="fa fa-search"></i></a></li>
                 {% if is_granted('ROLE_USER') %}
+                    <li><a href="{{ path('create_serie') }}">Create new TvSerie </a></li>
+                    <li><a href="{{ path('create_episode') }}">Create new Episode </a></li>
                     <li><a href="{{ path('security_logout') }}">Logout</a></li>
                 {% else %}
                     <li><a href="{{ path('security_login') }}">Login</a></li>
