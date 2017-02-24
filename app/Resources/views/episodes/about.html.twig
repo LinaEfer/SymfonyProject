@@ -11,17 +11,17 @@
                     <dd>{{ series.name }}</dd>
                      <div>
                         <dt>Episodes : </dt>
-                            {% for e in episodes %}
-                                <div class="col-md-12">
-                                    {{ e.episodeNumber}} - {{ e.name }}
-                                        <button class="btn pull-right btn-primary btn-sm" type="submit"><a href="{{ path ('add_episode', {'episode_name': e.name }) }}">I want watch it!</a></button>
-                                </div>
-                            {% endfor %}
+                        {% for e in episodes %}
+                            <div class="col-md-12">
+                                {{ e.episodeNumber}} - {{ e.name }}
+                                <a class="btn pull-right btn-primary btn-sm" href="{{ path ('add_episode', {'episode_name': e.name }) }}">I want to watch it!</a>
+                            </div>
+                        {% endfor %}
                      </div>
             </dl>
         </div>
     </div>
     <div class="notes-container">
-        <button type="submit" class="btn btn-primary"><a href="{{ path('homepage') }}">Back to Homepage</a></button>
+        <a class="btn btn-primary" href="{{ path('homepage') }}">Back to Homepage</a>
     </div>
 {% endblock %}
