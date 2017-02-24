@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Episode;
 use AppBundle\Entity\TvSeries;
 use AppBundle\Form\TvSeriesForm;
+use Knp\Component\Pager\Paginator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,12 +59,23 @@ class TvSeriesController extends Controller
 	/**
      * @Route("/", name="homepage")
      */
-	public function listAction() {
+	public function listAction(Request $request) {
 
 		$manager = $this->getDoctrine()->getManager();
         $series = $manager->getRepository(TvSeries::class)->findAll();
         $episodes = $manager->getRepository(Episode::class)->findAll();
 
-		return $this->render('index.html.twig',['series' => $series,'episodes' => $episodes]);
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $series,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 6)
+        );
+        dump(get_class($paginator));
+
+		return $this->render('index.html.twig',['series' => $result,'episodes' => $episodes]);
 	}
 }

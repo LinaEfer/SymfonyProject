@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="2237710876">
+  <component name="DataSourceManagerImpl" format="xml" hash="2976551680">
     <data-source source="LOCAL" name="SymfonyProject" uuid="cac3fac3-0986-4329-8280-39bd91e80579">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>

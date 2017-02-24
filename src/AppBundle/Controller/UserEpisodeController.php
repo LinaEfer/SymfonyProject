@@ -34,13 +34,13 @@ class UserEpisodeController extends Controller
         $ue->setUser($user);
         $ue->setEpisode($eName);
 
-        dump($user, $eName, $ue);
+        //dump($user, $eName, $ue);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($ue);
         $em->flush();
 
-        return new Response('magic');
+        return new Response('New episode in the Watchlist!');
 
     }
 
